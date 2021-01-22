@@ -2,6 +2,10 @@
 
 Scripts associated with the analysis of the NIAB Diverse MAGIC wheat population. More information about this population can be found at http://mtweb.cs.ucl.ac.uk/mus/www/MAGICdiverse/index.html.
 
+# SCRIPTS
+
+The SCRIPTS directory contains shell scripts used for alignment, variant calling, imputation, and association mapping. These scripts were tested on the UCL Research Computing HPC cluster, which uses a Sun Grid Engine scheduler. The flags for submission via SGE are at the head of each submission script. The required software is specified/loaded in "Input/software.sh". This will have to be modified to reflect the local install locations. The locations for accessing raw data and writing intermediate files is specified in Input/data_and_variables.sh.
+
 # vcf2df.pl
 
 Perl script for extracting haplotype dosages from vcfs outputted by STITCH (Davies et al., 2016). 
