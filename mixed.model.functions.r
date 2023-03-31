@@ -90,8 +90,8 @@ mixed.model.snps <- function( phenfile, phenotype, id.column="IID", grm.datafile
     mm.gwas.cor =  cor( mm.transformed.y, mm.transformed.g )
     n = length(mm.transformed.y)
     df = n-2
-    t.stat = mm.gwas.cor*sqrt((df-2)/(1.0e-10+sqrt(1-mm.gwas.cor*mm.gwas.cor)))
-    pval = 2*pt( abs(t.stat), df, low=FALSE )
+	t.stat = mm.gwas.cor*sqrt(df)/(1.0e-10+sqrt(1-mm.gwas.cor*mm.gwas.cor))
+	pval = 2*pt( abs(t.stat), df, lower.tail =FALSE )
     logP<-data.frame(map,logP=(-log10(pval[1,])))
 
     if ( n.perm > 0 ) {
@@ -100,7 +100,7 @@ mixed.model.snps <- function( phenfile, phenotype, id.column="IID", grm.datafile
             perms[,i] = sample(mm.transformed.y,replace=FALSE)
         }
         mm.gwas.cor.perm = cor( perms, mm.transformed.g )
-        t.stat.perm = mm.gwas.cor.perm*sqrt((df-2)/(1.0e-10+sqrt(1-mm.gwas.cor.perm*mm.gwas.cor.perm)))
+        t.stat.perm = mm.gwas.cor.perm*sqrt(df)/(1.0e-10+sqrt(1-mm.gwas.cor.perm*mm.gwas.cor.perm))
         pval.perm = 2*pt( abs(t.stat.perm), df, low=FALSE)
         logP.perm=t(-log10(pval.perm))
         logP.max = apply( logP.perm, 2, max, na.rm=TRUE)
